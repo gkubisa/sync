@@ -1,9 +1,12 @@
 {
-  "imports": {
-    "std/": "https://deno.land/std@0.182.0/"
-  },
   "tasks": {
-    "dev": "deno run --watch server/main.ts"
+    "client:dev": "deno run -A --unstable --node-modules-dir npm:vite",
+    "client:build": "deno run -A --unstable --node-modules-dir npm:vite build",
+    "client:preview": "deno run -A --unstable --node-modules-dir npm:vite preview",
+    "client:serve": "deno run --allow-env=CLIENT_PORT,SERVER_PORT --allow-read=.env,.env.defaults,.env.example,client/dist/ --allow-net=0.0.0.0 client/serve.ts client/dist/",
+    "server:dev": "deno run --watch --allow-env=CLIENT_PORT,SERVER_PORT --allow-read=.env,.env.defaults,.env.example --allow-net=0.0.0.0 server/main.ts",
+    "server:serve": "deno run --allow-env=CLIENT_PORT,SERVER_PORT --allow-read=.env,.env.defaults,.env.example --allow-net=0.0.0.0 server/main.ts",
+    "dev": "deno task client:dev & deno task server:dev"
   },
   "test": {
     "files": {
